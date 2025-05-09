@@ -69,7 +69,6 @@ La solution s'articule autour d'Odoo comme interface utilisateur, qui communique
 -   **OS pour les templates/VMs**: Ubuntu Server 22.04 LTS (principalement), [TODO: Lister autres OS supportés]
 
 ## Structure du Dépôt
-Use code with caution.
 Markdown
 .
 ├── .github/workflows/ # (Futur) CI/CD pipelines
@@ -147,7 +146,6 @@ cd iac/packer/ubuntu-2204/
 packer init .
 packer validate .
 packer build .
-Use code with caution.
 Le template sera disponible dans Proxmox VE.
 Option 2: Conversion d'Image VMDK
 Utilisez le script scripts/orchestrate_deployment.py (adapté du script de conversion) ou scripts/convert_vmdk.sh pour convertir une image VMDK existante en QCOW2 et potentiellement créer une VM.
@@ -158,8 +156,7 @@ sudo python3 orchestrate_deployment.py
 
 # Pour le script shell (conversion et import simple)
 # sudo ./convert_vmdk.sh <nom_base_vmdk_sans_extension> [vmid_cible_optionnelle]
-Use code with caution.
-Bash
+
 Déploiement de VM avec Terraform
 Ce processus clone un template Packer (Option 1) ou déploie une VM qui utilisera un disque converti (Option 2, nécessitant une adaptation de la configuration Terraform).
 cd iac/terraform/proxmox-vm/ # Ou un dossier d'environnement comme iac/terraform/environments/dev/
@@ -169,23 +166,19 @@ terraform init
 terraform validate
 terraform plan -out=vm.plan
 terraform apply vm.plan
-Use code with caution.
-Bash
 Configuration avec Ansible
 Une fois la VM provisionnée par Terraform et son IP connue :
 cd iac/ansible/
 # Assurez-vous que l'IP de la nouvelle VM est dans votre inventaire Ansible
 # (ou passez-la avec --limit ou via des extra-vars)
 ansible-playbook -i inventory/hosts.ini.example playbooks/configure_vm.yml --ask-become-pass
-Use code with caution.
-Bash
+
 Orchestration du Workflow
 [TODO: Décrivez comment le workflow de bout en bout est déclenché et géré. Si vous avez un script principal orchestrate_deployment.py qui gère l'ensemble, expliquez son utilisation ici.]
 Exemple si orchestré par un script Python:
 cd scripts/
 # sudo python3 main_orchestrator.py --os ubuntu2204 --cpu 2 --ram 2048 --disk 50 --client-id XYZ
-Use code with caution.
-Bash
+
 Détail des Sprints
 Le projet a été structuré en plusieurs sprints, chacun avec des objectifs spécifiques :
 Sprint 0: Préparation de l'environnement et fondations du projet.
